@@ -1,0 +1,16 @@
+<section class="container">
+    <div class="container__header">
+      <div class="container__header_title">
+        <h1>Contatos</h1>
+        <h2>Lista de contatos para orçamento</h2>
+      </div>
+      <div class="container__header_commands">
+        <button class="btn" onclick="alert('Olá')">Novo</button>
+      </div>
+    </div>
+    <div class="container__body">
+      @for (pessoa of pessoas; track $index) {
+        <app-card [pessoa]="pessoa"></app-card>
+      }
+    </div>
+  </section>
