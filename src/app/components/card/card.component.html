@@ -5,16 +5,5 @@
         <p>Telefone: {{pessoa.telefone}}</p>
         <p>Endereço: {{pessoa.endereco}}</p>
     </div>
-
-    <div class="edit" *ngIf="isEditing">
-        <input [(ngModel)]="pessoa.nome" placeholder="Nome">
-        <input [(ngModel)]="pessoa.email" placeholder="E-mail">
-        <input [(ngModel)]="pessoa.telefone" placeholder="Telefone">
-        <input [(ngModel)]="pessoa.endereco" placeholder="Endereço">
-
-    </div>
-
-    <div class="buttons">
-        <button NgIf="!isEditing" (click)="alterCard()" class="alter">Alterar</button>
-        <button (click)="removeItem()" class="delete">Deletar</button></div>
+    <ng-content/>
 </div>

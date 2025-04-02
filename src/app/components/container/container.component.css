@@ -14,3 +14,47 @@
     gap: 20px;
     justify-content: center;
   }
+
+
+
+  .delete, .alter {
+    height: 40px;
+    width: 80px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.delete {
+  background-color: #bb1919;
+}
+
+.alter {
+  background-color: yellowgreen;
+}
+
+
+
+  
+.form {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+}
+label {
+  font-weight: bold;
+}
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

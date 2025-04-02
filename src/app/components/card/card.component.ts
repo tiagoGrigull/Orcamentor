@@ -15,36 +15,11 @@ import { ContainerComponent } from '../container/container.component';
 export class CardComponent {
 
   @Input() pessoa!: Pessoas;
-  @Output() pessoaEditada = new EventEmitter<Pessoas>();
+ 
   @Output() addNewContact = new EventEmitter<void>();
   @Output() pessoaRemovida = new EventEmitter<Pessoas>();
   @Output() delete = new EventEmitter<number>();
   @Input() index!: number;
-
-  isEditing = false;
-
-  addNewCon(){
-    console.log("novo contato adicionado");
-    this.addNewContact.emit();
-  }
-
-  alterCard(){
-    this.isEditing = true;
-    console.log("alterando contato");
-  }
-
-  saveEdition(){
-    this.isEditing = false;
-    this.pessoaEditada.emit(this.pessoa);
-  }
-
-  deleteCard(){
-    console.log("Deletando contato");
-  }
-
-  removeItem() {
-    this.delete.emit(this.index); // Emite o índice para o ContainerComponent
-  }
 
 }
 

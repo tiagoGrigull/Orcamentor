@@ -1,11 +1,13 @@
-import { Component , Input} from '@angular/core';
+import { Component , Input,Output, EventEmitter} from '@angular/core';
 import { CardComponent } from '../card/card.component';
 import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-container',
   standalone: true,
-  imports: [CardComponent],
+  imports: [CardComponent, CommonModule, FormsModule, ],
   templateUrl: './container.component.html',
   styleUrl: './container.component.css'
 })
@@ -22,7 +24,7 @@ export class ContainerComponent {
     this.http.get(url).subscribe({
       next: (response) => {
         this.dados = response;
-        console.log("deu certo");
+        console.log(this.dados);
       },
       error: (erro) => {
         alert("Deu Ruim");
@@ -56,9 +58,35 @@ export class ContainerComponent {
     this.pessoas.splice(index,1);
   }
 
+   @Output() pessoaEditada = new EventEmitter<Pessoas>();
+  isEditing = false;
+  
+  editIndex: number | null = null;
+
+  alterCard(index: number) {
+    this.isEditing = true;
+    this.editIndex = index;
+    console.log("Alterando contato", this.pessoas[index]);
+  }
+
+
+  saveEdition() {
+    if (this.editIndex !== null) {
+      console.log("Salvando edição:", this.pessoas[this.editIndex]);
+      this.pessoaEditada.emit(this.pessoas[this.editIndex]); // Emitindo o contato atualizado
+    }
+    this.isEditing = false;
+    this.editIndex = null;
+  }
+  
+
+  cancelEdit() {
+    this.isEditing = false;
+    this.editIndex = null;
+  }
+  
+  
 }
-
-
 
 export type Pessoas ={
   nome: string;
