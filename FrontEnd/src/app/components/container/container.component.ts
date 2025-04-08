@@ -15,9 +15,32 @@ export class ContainerComponent {
   
   constructor(private http : HttpClient) {}
   dados:any;
+  contatosApi:any;
   ngOnInit():void{
     this.obterPrevisoes();
+    this.obterContatos();
   }
+
+  obterContatos(){
+    let url= "http://localhost:5248/api/Contatos";
+    this.http.get(url).subscribe({
+      next: (response) =>{
+        this.contatosApi = response;  
+        for (let pessoa of this.contatosApi)
+        this.pessoas.push({
+          nome: pessoa.nome,
+          email: pessoa.email,
+          telefone: pessoa.telefone,
+          endereco: pessoa.endereco,
+        });
+      },
+      error: (erro) =>{
+        console.log(`Erro ao obter contatos: ${erro}`)
+      },
+    })
+  }
+  
+  
 
   obterPrevisoes():void{
     let url = "http://localhost:5248/WeatherForecast";
@@ -35,19 +58,7 @@ export class ContainerComponent {
 
 
   protected pessoas: Array<Pessoas>=[
-    { 
-      nome: 'teste',
-      email: 'teste@gmail.com',
-      telefone: '4002-8922',
-      endereco: 'teste'
-    },
-    {
-      nome:'teste2',
-      email: 'oi',
-      telefone: '12345',
-      endereco: 'teste'
-    }
-  ]
+  ];
   
   addNewCon(){
     console.log("Adicionando novo contato");
@@ -88,7 +99,7 @@ export class ContainerComponent {
   
 }
 
-export type Pessoas ={
+interface Pessoas {
   nome: string;
   email: string;
   telefone: string;

@@ -9,8 +9,13 @@
       </div>
     </div>
     <div class="container__body">
-      @for (pessoa of pessoas; track $index) {
-        <app-card [pessoa]="pessoa" >
+      @for (item of pessoas; track $index) {
+        <app-card 
+        [nome]="item.nome"
+        [email]="item.email"
+        [telefone]="item.telefone"
+        [endereco]="item.endereco"
+         >
           <button class="delete" (click)="removeItem($index)">Deletar</button>
           <button class="alter" (click)="alterCard($index)">Alterar</button>
         </app-card>
