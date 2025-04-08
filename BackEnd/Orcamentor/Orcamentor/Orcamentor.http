@@ -1,0 +1,6 @@
+@Orcamentor_HostAddress = http://localhost:5248
+
+GET {{Orcamentor_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
