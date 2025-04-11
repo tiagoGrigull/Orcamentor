@@ -2,10 +2,17 @@ nav {
     background-color: #c09027;
     color: white;
     padding: 1em;
-    text-align: left;
+    display: flex;
     font-size: 1.5em;
+    align-items: center;
+    justify-content: space-between;
   }
 
+  nav a{
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+  }
   h1 {
     color: black;
   }

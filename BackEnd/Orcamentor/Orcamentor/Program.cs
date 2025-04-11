@@ -1,22 +1,28 @@
+using Microsoft.EntityFrameworkCore;
+using Orcamentor.Infra.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Adicionando serviços ao container
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors(options => 
-options.AddPolicy("AllowAll", builder =>
-builder.AllowAnyOrigin()
-.AllowAnyMethod()
-.AllowAnyHeader())
+// Configuração do CORS
+builder.Services.AddCors(options =>
+    options.AddPolicy("AllowAll", builder =>
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader())
 );
+
+// Adicionando o DbContext antes de chamar builder.Build()
+builder.Services.AddDbContext<>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configuração do pipeline HTTP
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

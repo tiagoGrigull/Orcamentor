@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tiago.grigull\\source\\repos\\Orcamentor\\Orcamentor\\Orcamentor.csproj": {}
+    "C:\\Users\\tiago.grigull\\Desktop\\Orcamento\\BackEnd\\Orcamentor\\Orcamentor\\Orcamentor.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tiago.grigull\\source\\repos\\Orcamentor\\Orcamentor\\Orcamentor.csproj": {
+    "C:\\Users\\tiago.grigull\\Desktop\\Orcamento\\BackEnd\\Orcamentor\\Orcamentor\\Orcamentor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tiago.grigull\\source\\repos\\Orcamentor\\Orcamentor\\Orcamentor.csproj",
+        "projectUniqueName": "C:\\Users\\tiago.grigull\\Desktop\\Orcamento\\BackEnd\\Orcamentor\\Orcamentor\\Orcamentor.csproj",
         "projectName": "Orcamentor",
-        "projectPath": "C:\\Users\\tiago.grigull\\source\\repos\\Orcamentor\\Orcamentor\\Orcamentor.csproj",
+        "projectPath": "C:\\Users\\tiago.grigull\\Desktop\\Orcamento\\BackEnd\\Orcamentor\\Orcamentor\\Orcamentor.csproj",
         "packagesPath": "C:\\Users\\tiago.grigull\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tiago.grigull\\source\\repos\\Orcamentor\\Orcamentor\\obj\\",
+        "outputPath": "C:\\Users\\tiago.grigull\\Desktop\\Orcamento\\BackEnd\\Orcamentor\\Orcamentor\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,6 +50,28 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[8.0.3, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
