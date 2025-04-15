@@ -5,12 +5,12 @@
         <form #form="ngForm" (submit)="login(form)">
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" id="email" name="email" class="form-control" [(ngModel)]="email" required>
+                <input type="email" id="email" name="email" class="form-control" [(ngModel)]="loginRequest.email" required>
             </div>
 
             <div class="mb-3">
                 <label for="senha" class="form-label">Senha:</label>
-                <input type="password" id="senha" name="senha" class="form-control" [(ngModel)]="senha" required>
+                <input type="password" id="senha" name="senha" class="form-control" [(ngModel)]="loginRequest.senha" required>
             </div>
 
             <button type="submit" class="btn btn-primary w-100">Entrar</button>
