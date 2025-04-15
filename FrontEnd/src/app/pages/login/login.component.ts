@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +14,19 @@ export class LoginComponent {
 email: string = '';
 senha: string = '';
 
-login() {
-  console.log('Email:', this.email);
-  console.log('Senha:', this.senha);
-}
 
+constructor(private router: Router) {}
+
+login(form: any) {
+  if (form.invalid) {
+    alert('Preencha todos os campos');
+    return;
+  }
+
+  if (this.email == 'admin' && this.senha == 'admin') {
+    this.router.navigate(['/home']);
+  } else {
+    alert('Email ou senha incorretos');
+  }
+}
 }
