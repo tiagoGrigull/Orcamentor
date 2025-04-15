@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
 );
 
 // Adicionando o DbContext antes de chamar builder.Build()
-builder.Services.AddDbContext<>(options =>
+builder.Services.AddDbContext<appDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();

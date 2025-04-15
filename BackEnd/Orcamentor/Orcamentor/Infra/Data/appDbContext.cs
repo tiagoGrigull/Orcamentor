@@ -1,12 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using Orcamentor.Model;
 
-namespace MeuProjeto.Data
+namespace Orcamentor.Infra.Data
 {
-    public class MeuDbContext : DbContext
+    public class appDbContext : DbContext
     {
-        public MeuDbContext(DbContextOptions<MeuDbContext> options) : base(options) { }
+        public appDbContext(DbContextOptions<appDbContext> options) : base(options) { }
 
-        public DbSet<> Tarefas { get; set; }
+       // public DbSet<> Tarefas { get; set; }
     }
 }
