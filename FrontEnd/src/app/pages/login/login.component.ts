@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth.service';
-import { LoginRequest } from '../../service/auth.service';
+import { AuthService } from '../../services/auth.service';
+import { LoginRequest } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -30,8 +30,7 @@ login(form: any) {
 
   this.authService.login(this.loginRequest).subscribe(
     response => {
-      // Redireciona para a página de home após o login bem-sucedido
-      this.router.navigate(['/home']);
+      this.router.navigate(['/Contatos']);
     },
     error => {
       alert('Email ou senha incorretos');

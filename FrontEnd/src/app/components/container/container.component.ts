@@ -1,107 +1,69 @@
-import { Component , Input,Output, EventEmitter} from '@angular/core';
-import { CardComponent } from '../card/card.component';
-import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CardComponent } from '../card/card.component';
+import { ContatoService } from '../../services/contato.service'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-container',
   standalone: true,
-  imports: [CardComponent, CommonModule, FormsModule, ],
+  imports: [CardComponent, CommonModule, FormsModule],
   templateUrl: './container.component.html',
-  styleUrl: './container.component.css'
+  styleUrls: ['./container.component.css']
 })
 export class ContainerComponent {
-  
-  constructor(private http : HttpClient) {}
-  dados:any;
-  contatosApi:any;
-  ngOnInit():void{
-    this.obterPrevisoes();
-    this.obterContatos();
-  }
 
-  obterContatos(){
-    let url= "http://localhost:5248/api/Contatos";
-    this.http.get(url).subscribe({
-      next: (response) =>{
-        this.contatosApi = response;  
-        for (let pessoa of this.contatosApi)
-        this.pessoas.push({
-          nome: pessoa.nome,
-          email: pessoa.email,
-          telefone: pessoa.telefone,
-          endereco: pessoa.endereco,
-        });
-      },
-      error: (erro) =>{
-        console.log(`Erro ao obter contatos: ${erro}`)
-      },
-    })
-  }
-  
-  
+  protected pessoas: Array<Pessoas> = [];
 
-  obterPrevisoes():void{
-    let url = "http://localhost:5248/WeatherForecast";
-    this.http.get(url).subscribe({
-      next: (response) => {
-        this.dados = response;
-        console.log(this.dados);
-      },
-      error: (erro) => {
-        alert("Deu Ruim");
-        console.log(`Erro ao obter as previsões: ${erro}`)
-      }
-    })
-  }
+  @Output() pessoaEditada = new EventEmitter<Pessoas>();
 
-
-  protected pessoas: Array<Pessoas>=[
-  ];
-  
-  addNewCon(){
-    console.log("Adicionando novo contato");
-    this.pessoas.push({ nome: 'Novo Contato',email:"novo.email@email.com", telefone: '0000-0000', endereco:'novo Endereco' });
-  }
-  
-  removeItem(index: number){
-    this.pessoas.splice(index,1);
-  }
-
-   @Output() pessoaEditada = new EventEmitter<Pessoas>();
   isEditing = false;
-  
   editIndex: number | null = null;
+
+  constructor(private contatoService: ContatoService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.contatoService.obterContatos().subscribe({
+      next: (contatos) => {
+        this.pessoas = contatos;
+      },
+      error: (err) => {
+        console.error('Erro ao obter contatos:', err);
+      }
+    });
+  }
+
+  addNewCon() {
+  this.router.navigate(['/contato-cadastro']);
+  }
+
+  removeItem(index: number) {
+    this.pessoas.splice(index, 1);
+  }
 
   alterCard(index: number) {
     this.isEditing = true;
     this.editIndex = index;
-    console.log("Alterando contato", this.pessoas[index]);
   }
-
 
   saveEdition() {
     if (this.editIndex !== null) {
-      console.log("Salvando edição:", this.pessoas[this.editIndex]);
-      this.pessoaEditada.emit(this.pessoas[this.editIndex]); // Emitindo o contato atualizado
+      this.pessoaEditada.emit(this.pessoas[this.editIndex]);
     }
     this.isEditing = false;
     this.editIndex = null;
   }
-  
 
   cancelEdit() {
     this.isEditing = false;
     this.editIndex = null;
   }
-  
-  
 }
 
-interface Pessoas {
+export interface Pessoas {
   nome: string;
   email: string;
   telefone: string;
-  endereco: string
+  endereco: string;
 }
