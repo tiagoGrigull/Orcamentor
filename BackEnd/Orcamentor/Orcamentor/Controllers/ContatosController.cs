@@ -1,30 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Orcamentor.Model.Repository.Interfaces;
 using System.Collections.Generic;
 
 namespace Orcamentor.Controllers
 {
-    public class Contato
-    {
-        public string nome { get; set; }
-        public string email { get; set; }
-        public string numero { get; set; }
-        public string endereco { get; set; }
-    }
 
     [ApiController] 
     [Route("api/[controller]")]
     public class ContatosController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult GetContatos()
+
+        private readonly IContatoRepository _contatoRepository;
+
+        public ContatosController(IContatoRepository repositoryContatos)
         {
-            var contatos = new List<Contato>
-            {
-                new Contato {nome = "Tiago", email = "tiago@gmail.com", numero = "4002-8922", endereco = "rua dos bobos Nr 0"},
-                new Contato {nome = "Tiago", email = "tiago@gmail.com", numero = "4002-8922", endereco = "rua dos bobos Nr 0"},
-                new Contato {nome = "Tiago", email = "tiago@gmail.com", numero = "4002-8922", endereco = "rua dos bobos Nr 0"},
-                new Contato {nome = "Tiago", email = "tiago@gmail.com", numero = "4002-8922", endereco = "rua dos bobos Nr 0"},
-            };
+            _contatoRepository = repositoryContatos;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            var contatos = _contatoRepository.GetAll();
             return Ok(contatos);
         }
     }

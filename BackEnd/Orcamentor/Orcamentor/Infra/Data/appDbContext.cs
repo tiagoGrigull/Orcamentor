@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Orcamentor.Model;
 
 namespace Orcamentor.Infra.Data
 {
@@ -6,6 +7,6 @@ namespace Orcamentor.Infra.Data
     {
         public appDbContext(DbContextOptions<appDbContext> options) : base(options) { }
 
-       // public DbSet<> Tarefas { get; set; }
+        public DbSet<Contato> Contatos { get; set; }
     }
 }
