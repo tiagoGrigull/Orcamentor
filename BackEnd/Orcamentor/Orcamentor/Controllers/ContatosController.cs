@@ -6,7 +6,7 @@ namespace Orcamentor.Controllers
 {
 
     [ApiController] 
-    [Route("api/[controller]")]
+    [Route("api/contatos")]
     public class ContatosController : ControllerBase
     {
 
@@ -18,7 +18,7 @@ namespace Orcamentor.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetContatos()
         {
             var contatos = _contatoRepository.GetAll();
             return Ok(contatos);

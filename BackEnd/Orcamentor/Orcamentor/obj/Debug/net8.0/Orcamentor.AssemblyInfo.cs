@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Orcamentor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8438fd0188b2d409fa31595490cd27fc6046c85a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f3bde7ed734f2deae87ab7338489eeda596bf87")]
 [assembly: System.Reflection.AssemblyProductAttribute("Orcamentor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Orcamentor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
