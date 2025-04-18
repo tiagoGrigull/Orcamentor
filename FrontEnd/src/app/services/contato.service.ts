@@ -1,51 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {Pessoas} from  '../components/container/container.component';
 import { environment } from '../../environments/environment';
+import { CardComponent } from '../components/card/card.component';
+
+
+export interface ContatoRequest {
+  id: string;
+  nome: string;
+  email: string;
+  numero: string;
+}
+
+export interface ContatoResponse {
+  id: number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContatoService {
 
-     private apiUrl = `http://localhost:5248/Contatos`;
+  private apiUrl = `${environment.apiUrl}/contatos`;
+  constructor(private http: HttpClient ) { }
 
-  contatosApi: any;
-  dados: any;
-
-  // Lista de contatos visíveis no frontend
-  pessoas: Array<Pessoas> = [];
-
-  constructor(private http: HttpClient) { }
-
-  // Remove um contato da lista
-  removeItem(index: number): void {
-    this.pessoas.splice(index, 1);
+ obterContatos(): Observable<CardComponent[]> {
+    return this.http.get<CardComponent[]>(this.apiUrl);
   }
 
-  // Obtém os contatos da API e popula a lista
-  carregarContatos(): void {
-    this.http.get<Pessoas[]>(this.apiUrl).subscribe({
-      next: (response) => {
-        this.contatosApi = response;
-        for (let pessoa of this.contatosApi) {
-          this.pessoas.push({
-            nome: pessoa.nome,
-            email: pessoa.email,
-            telefone: pessoa.telefone,
-            endereco: pessoa.endereco,
-          });
-        }
-      },
-      error: (erro) => {
-        console.log(`Erro ao obter contatos: ${erro}`);
-      }
-    });
+
+  salvar(contato: ContatoRequest): Observable<ContatoResponse> {
+    return this.http.post<ContatoResponse>(this.apiUrl, contato);
   }
 
-  // Alternativamente, se você quiser apenas retornar o Observable:
-  obterContatos(): Observable<Pessoas[]> {
-    return this.http.get<Pessoas[]>(this.apiUrl);
-  }
 }

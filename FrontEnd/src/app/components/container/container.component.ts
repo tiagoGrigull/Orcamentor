@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CardComponent } from '../card/card.component';
 import { ContatoService } from '../../services/contato.service'; 
 import { Router } from '@angular/router';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-container',
@@ -13,57 +14,52 @@ import { Router } from '@angular/router';
   styleUrls: ['./container.component.css']
 })
 export class ContainerComponent {
+  dados: any;
+  contatosApi: any;
 
-  protected pessoas: Array<Pessoas> = [];
-
-  @Output() pessoaEditada = new EventEmitter<Pessoas>();
-
-  isEditing = false;
-  editIndex: number | null = null;
-
-  constructor(private contatoService: ContatoService, private router: Router) {}
+  constructor( private contatoService: ContatoService, private router: Router) {  }
 
   ngOnInit(): void {
+    this.obterContatos();
+  }
+
+  obterContatos() {
     this.contatoService.obterContatos().subscribe({
-      next: (contatos) => {
-        this.pessoas = contatos;
+      next: (response) => {
+        
+        this.contatosApi = response;
       },
-      error: (err) => {
-        console.error('Erro ao obter contatos:', err);
-      }
+      error: (erro) => {
+        alert('Ocorreu um erro ao buscar os contatos na api => /api/Contatos');
+        console.log(`Ocorreu um erro ao realizar a requisição: ${erro}`);        
+      },
     });
   }
-
-  addNewCon() {
-  this.router.navigate(['/contato-cadastro']);
-  }
-
+  //Aki implementar a chamada no back com a service de contatos
   removeItem(index: number) {
-    this.pessoas.splice(index, 1);
+    this.contatos.splice(index, 1);
   }
 
-  alterCard(index: number) {
-    this.isEditing = true;
-    this.editIndex = index;
+  filter(filtro: string) {
+    this.contatosApi = this.contatos.filter((contato) =>
+      contato.nome.toLowerCase().includes(filtro.toLowerCase())
+    );
   }
 
-  saveEdition() {
-    if (this.editIndex !== null) {
-      this.pessoaEditada.emit(this.pessoas[this.editIndex]);
-    }
-    this.isEditing = false;
-    this.editIndex = null;
+  addItem() {
+    this.router.navigate(['/contato-cadastro']);
+   // this.contatos.push({ nome: 'Novo contato', email: ' ', telefone: ' ' });
   }
 
-  cancelEdit() {
-    this.isEditing = false;
-    this.editIndex = null;
-  }
+  @Input() titulo: string = 'Contatos';
+  @Input() descricao: string = 'Contatos para realização de orçamentos';
+  @Input() notaRodape: string = 'Nota de rodapé importante!';
+
+  contatos: Array<CardComponent> = [];
 }
 
-export interface Pessoas {
+interface Contato {
   nome: string;
   email: string;
-  telefone: string;
-  endereco: string;
+  numero: string;
 }
